@@ -8,9 +8,14 @@
 </head>
 <body>
 
-<script type="application/json" id="booted_feeds_json">
+<script type="application/javascript" id="booted_feeds_json">
   <% Feed.find_or_create_by_url("http://feeds.feedburner.com/newsyc20") %>
-  <%= Feed.all.to_json.html_safe %>
+
+  var FEEDS = <%= Feed.all.to_json.html_safe %>
+
+    FEEDS.forEach(function(feed){
+       feed.entries = <%= Entry.all.to_json.html_safe %>
+    });
 </script>
 
 <%= yield %>

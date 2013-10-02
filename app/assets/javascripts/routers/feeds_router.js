@@ -20,10 +20,11 @@ NR.Routers.FeedsRouter = Backbone.Router.extend({
 
   show: function (id) {
     var feed = this.feeds.findWhere({id: parseInt(id)});
+    var entries = new NR.Collections.Entries(feed.get("entries"));
 
     var feedView = new NR.Views.FeedView({
       model: feed,
-      collection: [] //entries
+      collection: entries
     });
 
     this.$rootEl.html(feedView.render().$el);
