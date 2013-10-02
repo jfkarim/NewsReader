@@ -14,6 +14,7 @@ NR.Views.FeedFormView = Backbone.View.extend({
     event.preventDefault();
     var formData = $("form.create-feed").serializeJSON();
 
-    this.collection.create(formData);
+    this.collection.create(formData.feed);
+
   }
 });

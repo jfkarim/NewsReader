@@ -1,4 +1,8 @@
 NR.Collections.Entries = Backbone.Collection.extend({
-  model: NR.Models.Entry,
-  url: "/feeds/:feed_id/entries"
+
+  initialize: function () {
+    // this.feed_id = feed_id;
+  },
+
+  model: NR.Models.Entry
 })

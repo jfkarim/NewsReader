@@ -15,7 +15,10 @@ NR.Routers.FeedsRouter = Backbone.Router.extend({
       collection: this.feeds
     });
 
+    var feed = new NR.Models.Feed();
+
     var feedFormView = new NR.Views.FeedFormView({
+      model: feed,
       collection: this.feeds
     });
 
@@ -24,16 +27,20 @@ NR.Routers.FeedsRouter = Backbone.Router.extend({
   },
 
   show: function (id) {
+    var that = this;
     var feed = this.feeds.findWhere({id: parseInt(id)});
-    console.log(feed);
-    var entries = new NR.Collections.Entries(feed.get("entries"));
-    console.log(entries);
-    var feedView = new NR.Views.FeedView({
-      model: feed,
-      collection: entries
-    });
+    //feed.get("entries")
 
-    this.$rootEl.html(feedView.render().$el);
+    var entries = new NR.Collections.Entries([], { url: "/feeds/" + parseInt(id) + "/entries" });
+    entries.fetch({
+      success: function () {
+        var feedView = new NR.Views.FeedView({
+          model: feed,
+          collection: entries
+        });
+        that.$rootEl.html(feedView.render().$el);
+      }
+    });
   }
 
 });
