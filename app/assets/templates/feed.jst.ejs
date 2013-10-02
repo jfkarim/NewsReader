@@ -1,0 +1,8 @@
+<h2><%= feed.escape("title") %></h2>
+
+<% entries.forEach ( function (entry) { %>
+  <% var link = entry.escape("link"),
+         title = entry.escape("title"); %>
+
+  <li><a href="<%= link %>"><%= title %></a></li>
+<% }); %>

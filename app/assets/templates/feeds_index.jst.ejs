@@ -1,0 +1,6 @@
+<% feeds.forEach ( function (feed) { %>
+  <% var id = feed.escape("id"),
+         title = feed.escape("title"); %>
+
+  <li><a href="#/feeds/<%= id %>"><%= title %></a></li>
+<% }); %>

@@ -4,5 +4,8 @@
 </div>
 
 <script>
-
+  $(document).ready( function () {
+    var FEEDS = JSON.parse($("#booted_feeds_json").html());
+    NR.initialize($("#content"), FEEDS);
+  });
 </script>
