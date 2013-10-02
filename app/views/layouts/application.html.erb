@@ -8,6 +8,15 @@
 </head>
 <body>
 
+  <% if !current_user.nil? %>
+    <ul>
+      <li>Logged in as: <%= current_user.username %></li>
+      <li><%= button_to "Logout", session_url, :method => :delete %></li>
+    </ul>
+  <% end %>
+
+<%= yield %>
+
 <script type="application/javascript" id="booted_feeds_json">
   <% Feed.find_or_create_by_url("http://feeds.feedburner.com/newsyc20") %>
 
@@ -17,9 +26,6 @@
        feed.entries = <%= Entry.all.to_json.html_safe %>
     });
 </script>
-
-<%= yield %>
-
-
 </body>
 </html>
+
