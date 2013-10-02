@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :password_digest, :session_token
+  attr_accessible :name, :password, :session_token
   attr_reader :password
 
   validates :password_digest, :presence => { :message => "Password can't be blank" }
@@ -9,8 +9,11 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
-  def self.find_by_credentials(username, password)
-    user = User.find_by_username(username)
+  has_many :user_feeds
+  has_many :feeds, through: :user_feeds, source: :feed
+
+  def self.find_by_credentials(name, password)
+    user = User.find_by_name(name)
 
     return nil if user.nil?
 

@@ -1,3 +1,15 @@
 <h1><%= @user.name %></h1>
 
-<p>Hello, dear user!</p>
+<div id='content'></div>
+
+<script>
+  $(document).ready( function () {
+    var feeds = JSON.parse($("#booted_feeds_json").html());
+
+    NR.initialize($("#content"), feeds);
+  });
+</script>
+
+<script type="application/json" id="booted_feeds_json">
+ <%= Feed.includes(:entries).all.to_json(include: :entries).html_safe %>
+</script>

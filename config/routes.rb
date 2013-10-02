@@ -5,5 +5,5 @@ NewReader::Application.routes.draw do
     resources :entries, only: [:index]
   end
 
-  root to: "session#new"
+  root to: "sessions#new"
 end
